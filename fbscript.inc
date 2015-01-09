@@ -10,9 +10,12 @@ window.fbAsyncInit = function() {
 
 	function onLogin(response) {
 		if (response.status == 'connected') {
-			FB.api('/me?fields=first_name', function(data) {
+			FB.api('/me', function(data) {
 				var welcomeBlock = document.getElementById('fb-welcome');
 				welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+				console.log('fetched fb data')
+				console.log(data)
+				app.init.call(app)
 			});
 		}
 	}

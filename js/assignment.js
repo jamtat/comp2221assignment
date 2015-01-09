@@ -2,6 +2,7 @@ var app = {
 
 	init: function() {
 		app._.getEl()
+		q('#intro span').innerHTML = 'Loading Questions'
 		app._.getQuestions(function(err,result) {
 			if(err) {
 				app.view.showErr(err+'<br>Try reloading the application')
@@ -11,30 +12,6 @@ var app = {
 				app.ready()
 			}
 		})
-
-		// Place following code after FB.init call.
-
-		function onLogin(response) {
-			if (response.status == 'connected') {
-				FB.api('/me?fields=first_name', function(data) {
-					var welcomeBlock = document.getElementById('fb-welcome');
-					welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-				});
-			}
-		}
-
-		FB.getLoginStatus(function(response) {
-			// Check login status on load, and if the user is
-			// already logged in, go directly to the welcome message.
-			if (response.status == 'connected') {
-				onLogin(response);
-			} else {
-				// Otherwise, show Login dialog first.
-				FB.login(function(response) {
-					onLogin(response);
-				}, {scope: 'user_friends, email'});
-			}
-		});
 	},
 
 	ready: function() {
@@ -108,8 +85,3 @@ function q(selector) {
 function I(ID) {
 	return document.getElementById(ID)
 }
-
-
-$(function() {
-	app.init.call(app)
-})
