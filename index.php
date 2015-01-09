@@ -6,8 +6,10 @@
 		<link rel="stylesheet" href="css/assignment.css">
 	</head>
 	<body class="loading">
+		<?php include 'fbscript.inc' ?>
 		<div id="err"></div>
 		<div id="intro">
+			<h2 id="fb-welcome"></h2>
 			<h1>Ben's Amazing Quiz</h1>
 			<span>Loading Questions</span>
 			<div>Get Started</div>
