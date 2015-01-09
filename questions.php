@@ -84,6 +84,13 @@ function API_SUCCESS() {
 	echo json_encode($result);
 }
 
+function map_question($question) {
+	return Array(
+		"title" => $question['title'],
+		"answer" => $question['answers']
+	);
+}
+
 try {
 	//Get the questions
 	$input = file_get_contents('questions.json');
@@ -93,31 +100,41 @@ try {
 	API_DIE('Internal Server Error: Could not fetch questions');
 }
 
-if(isset($_GET['q'])) {
-	try {
-		$q = $_GET['q'];
-		$q = intval($q); //Defaults to 0 if it's non numeric anyway
-	} catch(Exception $e) {
-		API_DIE('Invalid Question Number Specified');
-	}
-	if($q >= $totalquestions) {
-		API_DIE("Question number $q out of bounds. Only $totalquestions questions available. Questions are 0 indexed.");
-	}
+if(isset($_GET['q']) and $_GET['q'] === 'all') {
+	//Shortcut to return all the questions
+	$result['questions'] = array_map("map_question", $questions);
+
 } else {
-	API_DIE('No question index specified');
+	//Otherwise try to parse an integer out of question index
+	if(isset($_GET['q'])) {
+		try {
+			$q = $_GET['q'];
+			$q = intval($q); //Defaults to 0 if it's non numeric anyway
+		} catch(Exception $e) {
+			API_DIE('Invalid Question Number Specified');
+		}
+		//Question index out of bounds!
+		if($q >= $totalquestions or $q < 0) {
+			API_DIE("Question number $q out of bounds. Only $totalquestions questions available. Questions are 0 indexed.");
+		}
+	} else {
+		API_DIE('No question index specified');
+	}
+
+	if (isset($_GET['hint'])) {
+		//We want the hint for a question!
+		$result['hint'] = $questions[$q]['hint'];
+	} elseif (isset($_GET['answer'])) {
+		//Send the correct answer!
+		$result['answer'] = $questions[$q]['answers'][$questions[$q]['correct']];
+	} else {
+		//Just return the question
+		$result['question'] = map_question($questions[$q]);
+	}
+
 }
 
-if (isset($_GET['hint'])) {
-	$result['hint'] = $questions[$q]['hint'];
-} elseif (isset($_GET['answer'])) {
-	$result['answer'] = $questions[$q]['answers'][$questions[$q]['correct']];
-} else {
-	$result['question'] = Array(
-		"title" => $questions[$q]['title'],
-		"answers" => $questions[$q]['answers']
-	);
-}
-
+//Append some summary information
 $result['summary'] = Array(
 	"total_questions" => $totalquestions
 );
