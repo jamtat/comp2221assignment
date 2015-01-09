@@ -9,5 +9,15 @@
 			"Horribly Trite Masochistic Language",
 			"Hi There M'Lady"
 		]
+	},
+	{
+		"title" : "What does JSON stand for?",
+		"hint" : "The answer is the Object of your desire!",
+		"correct" : 1,
+		"answers" : [
+			"Just Something Or Nothing",
+			"JavaScript Object Notation",
+			"Java Sync Over Network"
+		]
 	}
 ]

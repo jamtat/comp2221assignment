@@ -8,8 +8,10 @@
 html {
 	width: 100%;
 	height: 100%;
-	background: #737BCD url(../img/noise.png) repeat top left;
+	background: url(../img/noise.png) repeat top left;
+	background-color: #737BCD;
 	color: white;
+	transition: background-color 0.5s ease;
 }
 
 body {
@@ -54,19 +56,67 @@ input[type=submit] {
 	text-transform: capitalize;
 }
 
+#err {
+	display:none;
+	position: fixed;
+	top: 0;
+	left:0;
+	width: 100%;
+	padding: 1em;
+	text-align: center;
+	color: white;
+	background: red;
+
+	-webkit-animation: enter;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;
+	-moz-animation: enter;
+	-moz-animation-duration: 1s;
+	-moz-animation-iteration-count: 1;
+	-moz-animation-timing-function: ease-out;
+	animation: enter;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
+}
+
+.error {
+	background-color: red;
+}
+
+.error #err {
+	display: block;
+}
+
+.error #err ~ * {
+	opacity: 0.5;
+}
 
 #intro {
 	width: 100%;
-	display: table-cell;
+	display: none;
 	vertical-align: middle;
+}
+
+.loading #intro {
+	display: table-cell;
 }
 
 #intro span {
 	text-align:center;
 	display: block;
+	opacity:1;
+	height: 1em;
+	transition: all 0.5s ease;
 }
 
-#intro div {
+.loaded #intro span {
+	opacity:0;
+	height:0em;
+}
+
+.loading #intro div {
 	height: 2em;
 	width: 100%;
 	background-color: #60B9E0;
@@ -85,6 +135,21 @@ input[type=submit] {
 	animation-duration: 0.15s;
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
+
+	transition: all 0.5s ease;
+	color: transparent;
+}
+
+.loaded #intro div {
+	cursor: pointer;
+	background-color: #E06060;
+	color: white;
+	background-image: none;
+	text-align: center;
+	height: 2em;
+	line-height: 2em;
+	font-size: 3em;
+	font-weight: 200;
 }
 
 @-webkit-keyframes think {
@@ -105,13 +170,41 @@ input[type=submit] {
 	}
 }
 
+@-webkit-keyframes enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(150%);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0%);
+	}
+}
+
+@keyframes enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(150%);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0%);
+	}
+}
+
 main {
 	display: table-cell;
 	vertical-align: middle;
 	width: 100%;
+	transition: all 0.5s ease;
+	-webkit-animation: enter;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
 }
 
 #progress {
+	display: block;
 	position: fixed;
 	left:2em;
 	right:2em;
@@ -121,6 +214,18 @@ main {
 	border: 2px solid white;
 	background: linear-gradient(rgba(0,0,0,0.2), transparent);
 	box-shadow: inset 0 3 10px -5px rgba(27, 52, 63, 0.19);
+	-webkit-animation: enter;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;
+	-moz-animation: enter;
+	-moz-animation-duration: 1s;
+	-moz-animation-iteration-count: 1;
+	-moz-animation-timing-function: ease-out;
+	animation: enter;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
 }
 
 #progress-inner {
@@ -146,4 +251,11 @@ main {
 	-webkit-transform: translateX(50%);
 	font-size: 1.2em;
 	white-space: nowrap;
+}
+
+/* Hide main and progress while loading! */
+.loading main, .loading #progress {
+	display: none;
+	opacity:0;
+	-webkit-transform: translateY(150%);
 }

@@ -5,11 +5,12 @@
 		<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/assignment.css">
 	</head>
-	<body>
+	<body class="loading">
+		<div id="err"></div>
 		<div id="intro">
 			<h1>Ben's Amazing Quiz</h1>
 			<span>Loading Questions</span>
-			<div></div>
+			<div>Get Started</div>
 		</div>
 		<main>
 
