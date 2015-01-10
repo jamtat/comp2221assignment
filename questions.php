@@ -87,7 +87,8 @@ function API_SUCCESS() {
 function map_question($question) {
 	$ques = Array (
 		"type" => $question['type'],
-		"title" => $question['title']
+		"title" => $question['title'],
+		"colour" => '#'.substr(md5(json_encode($question)), -6)
 	);
 	switch ($question['type']) {
 		case "choice":
