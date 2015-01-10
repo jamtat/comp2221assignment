@@ -21,6 +21,9 @@ var app = {
 				$('.question input').change(function(e) {
 					app.changeAnswer(parseInt($(this).parents('.question').attr('data-question-id')), this.value)
 				})
+				$('.question input[type=text]').on('keydown',function(e) {
+					app.changeAnswer(parseInt($(this).parents('.question').attr('data-question-id')), this.value)
+				})
 				$('.hint-button').on('click', function(e) {
 					$(this).off('click')
 					app.model.hintsUsed += 1
@@ -76,13 +79,27 @@ var app = {
 	},
 
 	checkAnswer: function(questionId, callback) {
-		var myAnswer = app.model.answers[questionId].split(' ').join('').toLowerCase()
+		var isMultiple = app.model.questions[questionId].type === 'multiple'
+		if(!isMultiple) {
+			var myAnswer = app.model.answers[questionId].split(' ').join('').toLowerCase()
+		} else {
+			var myAnswer = app.model.answers[questionId].map(function(a) {
+				return a.split(' ').join('').toLowerCase()
+			}).sort()
+		}
 		app._.getAnswer(questionId, function(err, correctAnswer) {
 			if(err) {
 				app.view.showErr(err+'<br>Try reloading the application')
 			} else {
-				var ans = correctAnswer.split(' ').join('').toLowerCase()
-				callback(myAnswer == ans)
+				if(!isMultiple) {
+					var ans = correctAnswer.split(' ').join('').toLowerCase()
+					callback(myAnswer == ans)
+				} else {
+					var ans = correctAnswer.map(function(a) {
+						return a.split(' ').join('').toLowerCase()
+					}).sort()
+					callback(myAnswer.join('') == ans.join(''))
+				}
 			}
 		})
 	},
