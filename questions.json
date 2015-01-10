@@ -1,6 +1,7 @@
 [
 	{
 		  "title" : "What does HTML stand for?",
+		   "type" : "choice",
 		   "hint" : "Sugar overdose sms man's name direction",
 		"correct" : 0,
 		"answers" : [
@@ -11,12 +12,31 @@
 		]
 	},
 	{
-		"title" : "What does JSON stand for?",
+		  "title" : "What does JSON stand for?",
+		   "type" : "choice",
+		   "hint" : "It was borne of JavaScript",
 		"correct" : 1,
 		"answers" : [
 			"Just Something Or Nothing",
 			"JavaScript Object Notation",
 			"Java Sync Over Network"
 		]
+	},
+	{
+		  "title" : "JavaScript is...",
+		   "type" : "multiple",
+		   "hint" : "It's not always the best tool for the job!"
+		"correct" : [0,2],
+		"answers" : [
+			"Dynamically typed",
+			"Static typed",
+			"An interpreted language",
+			"The best language"
+		]
+	},
+	{
+		  "title" : "What is the abbreviated name of the World Wide Web Consortium?",
+		   "type" : "text",
+		"correct" : "W3C"
 	}
 ]

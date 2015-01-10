@@ -85,10 +85,37 @@ function API_SUCCESS() {
 }
 
 function map_question($question) {
-	return Array(
-		"title" => $question['title'],
-		"answer" => $question['answers']
+	$ques = Array (
+		"type" => $question['type'],
+		"title" => $question['title']
 	);
+	switch ($question['type']) {
+		case "choice":
+		case "multiple":
+			$ques['answers'] = $question['answers'];
+			break;
+		case "text":
+			break;
+
+	}
+
+	return $ques;
+
+}
+
+function map_answer($question) {
+	switch ($question['type']) {
+		case "choice":
+			return $question['answers'][$question['correct']];
+			break;
+		case "multiple":
+			return array_values(array_intersect_key($question['answers'],array_flip($question['correct'])));
+			break;
+		case "text":
+			return $question['correct'];
+		default:
+			return '';
+	}
 }
 
 try {
@@ -126,7 +153,7 @@ if(isset($_GET['q']) and $_GET['q'] === 'all') {
 		$result['hint'] = $questions[$q]['hint'];
 	} elseif (isset($_GET['answer'])) {
 		//Send the correct answer!
-		$result['answer'] = $questions[$q]['answers'][$questions[$q]['correct']];
+		$result['answer'] = map_answer($questions[$q]);
 	} else {
 		//Just return the question
 		$result['question'] = map_question($questions[$q]);
