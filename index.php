@@ -23,6 +23,8 @@
 			<div id="progress-inner" data-index="8" data-total="12"></div>
 		</div>
 
+		
+
 		<script src="js/jquery-1.11.2.min.js"></script>
 		<script src="js/assignment.js"></script>
 	</body>
