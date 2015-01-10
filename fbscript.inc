@@ -11,11 +11,15 @@ window.fbAsyncInit = function() {
 	function onLogin(response) {
 		if (response.status == 'connected') {
 			FB.api('/me', function(data) {
-				var welcomeBlock = document.getElementById('fb-welcome');
-				welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-				console.log('fetched fb data')
-				console.log(data)
-				app.init.call(app)
+				FB.api('/me/picture', function(picData) {
+					var welcomeBlock = document.getElementById('fb-welcome');
+					welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+					console.log('fetched fb data')
+					console.log(data)
+					app.fbData = data
+					app.fbPic = picData.data.url
+					app.init.call(app)
+				})
 			});
 		}
 	}

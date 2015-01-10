@@ -3,6 +3,7 @@ var app = {
 	init: function() {
 		app._.getEl()
 		q('#intro span').innerHTML = 'Loading Questions'
+		I('fbpic').style.backgroundImage = 'url('+app.fbPic+')'
 		app._.getQuestions(function(err,result) {
 			if(err) {
 				app.view.showErr(err+'<br>Try reloading the application')
@@ -63,9 +64,9 @@ var app = {
 
 	view: {
 		updateProgress: function() {
-			app.el.progressBar.setAttribute('data-index', app.model.currentQuestion)
+			app.el.progressBar.setAttribute('data-index', app.model.currentQuestion+1)
 			app.el.progressBar.setAttribute('data-total', app.model.questions.length)
-			app.el.progressBar.style.width = Math.round(app.model.currentQuestion/app.model.questions.length)+'%'
+			app.el.progressBar.style.width = Math.round(100*(app.model.currentQuestion+1)/app.model.questions.length)+'%'
 		},
 		showErr: function(err) {
 			app.el.err.innerHTML = err

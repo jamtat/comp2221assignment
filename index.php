@@ -8,6 +8,7 @@
 	<body class="loading">
 		<?php include 'fbscript.inc' ?>
 		<div id="err"></div>
+		<div id="fbpic"></div>
 		<div id="intro">
 			<h2 id="fb-welcome"></h2>
 			<h1>Ben's Amazing Quiz</h1>

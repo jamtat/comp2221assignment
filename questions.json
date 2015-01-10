@@ -12,7 +12,6 @@
 	},
 	{
 		"title" : "What does JSON stand for?",
-		"hint" : "The answer is the Object of your desire!",
 		"correct" : 1,
 		"answers" : [
 			"Just Something Or Nothing",
