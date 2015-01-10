@@ -327,7 +327,7 @@ h3 {
 	border: 1px solid rgba(255,255,255,0.5);
 	font-weight: 300;
 	display: block;
-	cursor: pointer;
+	cursor: not-allowed;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	transition: all 0.5s ease;
@@ -338,10 +338,11 @@ h3 {
 }
 
 .answer-button.enabled {
-	oapcity:1;
+	opacity: 1;
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	transform: scale(1);
+	cursor: pointer;
 }
 
 .answer-button.enabled:hover {
@@ -363,7 +364,9 @@ h3 {
 .answer-input-wrapper input[type=radio] {
 	display: none;
 }
-
+.answer-input-wrapper input[type=checkbox] {
+	display: none;
+}
 
 
 .answer-input-wrapper label {
@@ -395,6 +398,29 @@ h3 {
 	background: white;
 }
 
+
+.hint-button {
+	cursor:pointer;
+	text-align: center;
+	width: 7em;
+	margin: auto;
+	font-size: 1.2em;
+/* 	border-bottom: 1px dotted white; */
+/* 	border-width:1px; */
+/* 	border-style: solid; */
+	background: white;
+	padding: 0.3em;
+	cursor: help;
+}
+
+.hint-text {
+	color: white !important;
+	text-align: center;
+}
+
+.hint-text::before {
+	content: "Hint: ";
+}
 
 .cf:before,
 .cf:after {

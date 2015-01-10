@@ -11,13 +11,25 @@ var app = {
 				console.log(result)
 				app.model.questions = result.questions.map(function(q,i){
 					q.id = i
+					app.model.answers.push(null)
+					app.model.scores.push(0)
 					return q
 				})
 				var templateSource = I('questions-template').innerHTML
 				var questionsTemplate = Handlebars.compile(templateSource)
 				app.el.main.innerHTML = questionsTemplate({questions:app.model.questions})
 				$('.question input').change(function(e) {
-					console.log(e)
+					app.changeAnswer(parseInt($(this).parents('.question').attr('data-question-id')), this.value)
+				})
+				$('.hint-button').on('click', function(e) {
+					$(this).off('click')
+					app.model.hintsUsed += 1
+					this.className += ' loading'
+					this.innerHTML = 'Loading Hint...'
+					app.showHint(this.getAttribute('data-question-id'))
+				})
+				$('.answer-button').on('click', function(e) {
+					app.submitAnswer(parseInt(this.getAttribute('data-question-id')))
 				})
 				app.ready()
 			}
@@ -34,6 +46,56 @@ var app = {
 			app.goToQuestion(0)
 		})
 		app.view.updateProgress()
+	},
+
+	changeAnswer: function(questionId, answer) {
+		if(app.model.questions[questionId].type !== 'multiple') {
+			app.model.answers[questionId] = answer
+			console.log('Set answer for question '+questionId+' to "'+answer+'"')
+		} else {
+			checkedAnswers = []
+			$('[name=question-input-'+questionId+']:checked').each(function() {
+				checkedAnswers.push(this.value)
+			})
+			app.model.answers[questionId] = checkedAnswers
+			console.log('Set answers for question '+questionId+' to ["'+checkedAnswers.join('", "')+'"]')
+		}
+		$('.answer-button[data-question-id='+questionId+']')[app.canSubmit(questionId)?'addClass':'removeClass']('enabled')
+	},
+
+	submitAnswer: function(questionId) {
+		app.checkAnswer(questionId, function(correct) {
+			app.model.scores[questionId] = correct+0
+			app.goToQuestion(questionId+1)
+		})
+	},
+
+	canSubmit: function(questionId) {
+		var answer = app.model.answers[questionId]
+		return answer === null || answer.length > 0
+	},
+
+	checkAnswer: function(questionId, callback) {
+		var myAnswer = app.model.answers[questionId].split(' ').join('').toLowerCase()
+		app._.getAnswer(questionId, function(err, correctAnswer) {
+			if(err) {
+				app.view.showErr(err+'<br>Try reloading the application')
+			} else {
+				var ans = correctAnswer.split(' ').join('').toLowerCase()
+				callback(myAnswer == ans)
+			}
+		})
+	},
+
+	showHint: function(questionId) {
+		app._.getHint(questionId, function(err, hint) {
+			if(err) {
+				app.view.showErr(err+'<br>Try reloading the application')
+			} else {
+				I('hint-button-'+questionId).innerHTML = hint
+				I('hint-button-'+questionId).className = 'hint-text'
+			}
+		})
 	},
 
 	goToQuestion: function(questionId) {
@@ -67,6 +129,16 @@ var app = {
 		getQuestions: function(callback) {
 			app._.getJSON('questions.php', {q:'all'}, function(err, j) {
 				callback(err,j)
+			})
+		},
+		getHint: function(questionId, callback) {
+			app._.getJSON('questions.php', {q:questionId,hint:'please'}, function(err, j) {
+				callback(err,j.hint)
+			})
+		},
+		getAnswer: function(questionId, callback) {
+			app._.getJSON('questions.php', {q:questionId,answer:'please'}, function(err, j) {
+				callback(err,j.answer)
 			})
 		},
 		RGBToHSL: function(RGB) {
@@ -168,6 +240,9 @@ var app = {
 
 	model: {
 		questions: [],
+		hintsUsed: 0,
+		answers: [],
+		scores: [],
 		currentQuestion: 0
 	},
 
@@ -194,7 +269,7 @@ var app = {
 }
 
 function Q(selector) {
-	return document.querySelectorAll(selector)
+	return [].slice.call(document.querySelectorAll(selector),0)
 }
 
 function q(selector) {

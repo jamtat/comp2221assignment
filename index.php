@@ -26,49 +26,50 @@
 		</div>
 
 		<script id="questions-template" type="text/x-handlebars-template">
-			{{#each questions}}
-			{{#with this}}
+			{{#questions}}
 				<section class="question vcentre" data-question-id="{{@index}}" data-question-type="{{type}}">
 					<div class="wrapper">
-						<h3 data-question-id="{{@index}}">{{title}}</h3>
+						<h3>{{title}}</h3>
 						<div class="answer-input-wrapper cf">
 							{{#ifvalue type value="choice"}}
-								{{#each answers}}
+								{{#answers}}
 								<div class="answer-input-row cf">
 									<input type="radio"
-										name="questioninput-{{lookup ../id}}"
-										id="question-input-{{lookup ../id}}-{{@index}}"
-										data-answer="{{this}}">
-									<label for="question-input-{{lookup ../id}}-{{@index}}">{{this}}</label>
+										name="questioninput-{{@../index}}"
+										id="question-input-{{@../index}}-{{@index}}"
+										value="{{this}}">
+									<label for="question-input-{{@../index}}-{{@index}}">{{this}}</label>
 								</div>
-								{{/each}}
+								{{/answers}}
 							{{/ifvalue}}
 
 							{{#ifvalue type value="multiple"}}
-								{{#each answers}}
+								{{#answers}}
 								<div class="answer-input-row cf">
 									<input type="checkbox"
-										name="question-input-{{lookup ../id}}"
-										id="question-input-{{lookup ../id}}-{{@index}}"
-										data-answer="{{this}}">
-									<label for="question-input-{{lookup ../id}}-{{@index}}">{{this}}</label>
+										name="question-input-{{@../index}}"
+										id="question-input-{{@../index}}-{{@index}}"
+										value="{{this}}">
+									<label for="question-input-{{@../index}}-{{@index}}">{{this}}</label>
 								</div>
-								{{/each}}
+								{{/answers}}
 							{{/ifvalue}}
 
 							{{#ifvalue type value="text"}}
 								<input type="text"
-									name="question-input-{{lookup ../id}}"
-									id="question-input-{{lookup ../id}}-{{@index}}"
+									name="question-input-{{@../index}}"
+									id="question-input-{{@../index}}-{{@index}}"
 									placeholder="Type your answer here">
 							{{/ifvalue}}
 						</div>
 
+						<div class="hint-button" id="hint-button-{{@index}}" data-question-id="{{@index}}" style="color:{{colour}};">Get Hint</div>
+
 						<div class="answer-button" data-question-id="{{@index}}">Submit Answer</div>
+
 					</div>
 				</section>
-			{{/with}}
-			{{/each}}
+			{{/questions}}
 		</script>
 
 		<script src="js/handlebars-v2.0.0.js"></script>
