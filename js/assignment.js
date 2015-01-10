@@ -125,6 +125,14 @@ var app = {
 		app.view.updateBackgroundHue()
 	},
 
+	goToSummary: function() {
+		var totalScore = app.model.scores.reduce(function(a,b) {
+			return a+b
+		})
+		I('total-score').innerHTML = totalScore
+		I('total-questions').innerHTML = app.model.questions.length
+	},
+
 	_: {
 		getEl: function() {
 			app.el.main = q('main')
