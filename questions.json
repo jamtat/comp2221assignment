@@ -25,7 +25,7 @@
 	{
 		  "title" : "JavaScript is...",
 		   "type" : "multiple",
-		   "hint" : "It's not always the best tool for the job!"
+		   "hint" : "It's not always the best tool for the job!",
 		"correct" : [0,2],
 		"answers" : [
 			"Dynamically typed",
