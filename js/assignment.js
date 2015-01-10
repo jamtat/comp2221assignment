@@ -12,6 +12,7 @@ var app = {
 				app.model.questions = result.questions.map(function(q,i){
 					q.id = i
 					app.model.answers.push(null)
+					app.model.correctAnswers.push(null)
 					app.model.scores.push(0)
 					return q
 				})
@@ -91,6 +92,7 @@ var app = {
 			if(err) {
 				app.view.showErr(err+'<br>Try reloading the application')
 			} else {
+				app.model.correctAnswers[questionId] = correctAnswer
 				if(!isMultiple) {
 					var ans = correctAnswer.split(' ').join('').toLowerCase()
 					callback(myAnswer == ans)
@@ -260,6 +262,7 @@ var app = {
 		hintsUsed: 0,
 		answers: [],
 		scores: [],
+		correctAnswers: [],
 		currentQuestion: 0
 	},
 
