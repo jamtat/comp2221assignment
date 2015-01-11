@@ -35,7 +35,8 @@
 		]
 	},
 	{
-		  "title" : "What is the abbreviated name of the World Wide Web Consortium?",
+		  "title" : "What is the most common abbreviated form of \"World Wide Web Consortium?\"",
+		   "hint" : "Count the W's!",
 		   "type" : "text",
 		"correct" : "W3C"
 	}

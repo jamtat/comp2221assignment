@@ -23,6 +23,18 @@
 
 		</main>
 
+		<div id="summary" class="vcentre">
+			<div class="wrapper">
+				<h1>You Scored</h1>
+				<div id="score-display">
+					<div id="total-score"></div>
+					<div id="total-questions"></div>
+				</div>
+
+				<ol class="cf"></ol>
+			</div>
+		</div>
+
 		<div id="progress">
 			<div id="progress-inner" data-index="" data-total=""></div>
 		</div>
@@ -75,6 +87,13 @@
 				</section>
 			{{/questions}}
 		</script>
+
+		<script id="answers-template" type="text/x-handlebars-template">
+			{{#answers}}
+				<li {{#if this}}class="correct"{{/if}}></li>
+			{{/answers}}
+		</script>
+
 
 		<script src="js/handlebars-v2.0.0.js"></script>
 		<script>

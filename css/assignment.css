@@ -228,6 +228,8 @@ main {
 	-webkit-animation-timing-function: ease-out;
 }
 
+/* ------- PROGRESS BAR -------- */
+
 #progress {
 	display: block;
 	position: fixed;
@@ -278,7 +280,7 @@ main {
 	white-space: nowrap;
 }
 
-/* Hide main and progress while loading! */
+/* Hide main and progress while loading and summary! */
 .loading main, .loading #progress {
 	display: none;
 	opacity:0;
@@ -286,6 +288,15 @@ main {
 	-moz-transform: translateY(150%);
 	transform: translateY(150%);
 }
+
+.summary main, .summary #progress {
+	opacity:0;
+	-webkit-transform: translateY(150%);
+	-moz-transform: translateY(150%);
+	transform: translateY(150%);
+}
+
+/* ------- QUESTION SLIDES -------- */
 
 section.question {
 	position: absolute;
@@ -313,6 +324,8 @@ h3 {
 	padding: 0.5em;
 	margin: 0.5em 0;
 }
+
+/* ------- SUBMIT ANSWER BUTTON -------- */
 
 .answer-button {
 	width: 100%;
@@ -351,6 +364,8 @@ h3 {
 	-moz-transition: background 0.2s ease;
 	transition: background 0.2s ease;
 }
+
+/* ------- ANSWER RADIO/CHECKBOX INPUTS -------- */
 
 .answer-input-wrapper {
 	width: 100%;
@@ -398,6 +413,7 @@ h3 {
 	background: white;
 }
 
+/* ------- HINT BUTTON -------- */
 
 .hint-button {
 	cursor:pointer;
@@ -405,9 +421,6 @@ h3 {
 	width: 7em;
 	margin: auto;
 	font-size: 1.2em;
-/* 	border-bottom: 1px dotted white; */
-/* 	border-width:1px; */
-/* 	border-style: solid; */
 	background: white;
 	padding: 0.3em;
 	cursor: help;
@@ -422,6 +435,122 @@ h3 {
 	content: "Hint: ";
 }
 
+/* ------- SUMMARY SECTION -------- */
+
+.summary main, .summary #progress {
+	opacity:0;
+	-webkit-transform: translateY(150%);
+	-moz-transform: translateY(150%);
+	transform: translateY(150%);
+}
+
+#summary {
+	display: none;
+	position: absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height: 100%;
+}
+
+.summary #summary {
+	display: block;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+
+	transition: all 0.5s ease;
+	-webkit-animation: enter;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;
+}
+
+#summary .wrapper {
+	width: 100%;
+}
+
+/* ------- SCORE OUTPUT -------- */
+
+#score-display {
+	width: 50%;
+	margin: 1em auto;
+}
+
+#score-display > div {
+	font-size: 4em;
+	width: 50%;
+	margin: auto;
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+#total-score {
+	text-align: center;
+	border-bottom: 2px solid white;
+}
+
+#score-meter {
+	width: 50%;
+	height: 75%
+	float: left;
+	background: blue;
+	position: absolute;
+	top:25%;
+}
+
+ol {
+	padding: 2em;
+	counter-reset: answers;
+	list-style: none;
+}
+
+ol li {
+	float: left;
+	display: block;
+	font-size: 3em;
+	counter-increment: answers;
+	border: 1px solid white;
+	margin: 0.2em;
+	width: 1.5em;
+	height: 1.5em;
+	line-height: 1.7em;
+	padding-left: 0.5em;
+	text-align: center;
+	position: relative;
+}
+
+li::before {
+	content: counter(answers);
+	font-size: 0.5em;
+	display: block;
+	position: absolute;
+	top:0.1em;
+	left:0.2em;
+	line-height:1;
+	text-align: left;
+}
+
+li::after {
+	content: "X";
+	color: red;
+}
+
+li.correct::after {
+	content: "✓";
+	color: limegreen;
+}
+
+/* ------- CLEARFIX -------- */
 .cf:before,
 .cf:after {
     content: " "; /* 1 */
@@ -432,10 +561,6 @@ h3 {
     clear: both;
 }
 
-/**
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
- */
 .cf {
     *zoom: 1;
 }

@@ -70,7 +70,11 @@ var app = {
 	submitAnswer: function(questionId) {
 		app.checkAnswer(questionId, function(correct) {
 			app.model.scores[questionId] = correct+0
-			app.goToQuestion(questionId+1)
+			if(questionId+1 >= app.model.questions.length) {
+				app.goToSummary()
+			} else {
+				app.goToQuestion(questionId+1)
+			}
 		})
 	},
 
@@ -131,6 +135,16 @@ var app = {
 		})
 		I('total-score').innerHTML = totalScore
 		I('total-questions').innerHTML = app.model.questions.length
+		app.el.body.className = 'summary'
+
+		//Prepare answers
+		var ans = app.model.scores.map(function(s) {
+			return !!s
+		})
+		var templateSource = I('answers-template').innerHTML
+		var answersTemplate = Handlebars.compile(templateSource)
+		q('ol').innerHTML = answersTemplate({answers:ans})
+
 	},
 
 	_: {
