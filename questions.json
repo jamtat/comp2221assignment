@@ -1,5 +1,12 @@
 [
 	{
+		  "title" : "Pick the most favourited tweet",
+		  "count" : 3,
+		   "hint" : "Click on the links to go to them or just guess!",
+		   "type" : "twitter",
+		"sortkey" : "favourites"
+	},
+	{
 		  "title" : "What does HTML stand for?",
 		   "type" : "choice",
 		   "hint" : "Sugar overdose sms man's name direction",
@@ -39,5 +46,12 @@
 		   "hint" : "Count the W's!",
 		   "type" : "text",
 		"correct" : "W3C"
+	},
+	{
+		"title" : "Pick the most retweeted tweet",
+		"count" : 5,
+		"hint" : "Click on the links to go to them or just guess!",
+		"type" : "twitter",
+		"sortkey" : "retweets"
 	}
 ]

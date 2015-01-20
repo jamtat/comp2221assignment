@@ -1,4 +1,7 @@
 <?php
+
+include 'twitterquestions.php';
+
 session_name("chqx69assignment");
 session_start();
 
@@ -85,6 +88,7 @@ function API_SUCCESS() {
 }
 
 function map_question($question) {
+	global $fname;
 	$ques = Array (
 		"type" => $question['type'],
 		"title" => $question['title'],
@@ -97,7 +101,11 @@ function map_question($question) {
 			break;
 		case "text":
 			break;
-
+		case "twitter":
+			$tweets = getTweets($fname, $question['sortkey'], $question['count']);
+			$ques['tweets'] = $tweets['tweets'];
+			$ques['sortkey'] = $tweets['sortkey'];
+			break;
 	}
 
 	return $ques;
@@ -129,6 +137,10 @@ try {
 }
 
 if(isset($_GET['q']) and $_GET['q'] === 'all') {
+	if(!isset($_GET['name'])) {
+		API_DIE('No name specified');
+	}
+	$fname = $_GET['name'];
 	//Shortcut to return all the questions
 	$result['questions'] = array_map("map_question", $questions);
 

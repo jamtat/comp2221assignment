@@ -233,6 +233,7 @@ main {
 #progress {
 	display: block;
 	position: fixed;
+	z-index: 200;
 	left:2em;
 	right:2em;
 	bottom:0.5em;
@@ -310,12 +311,18 @@ section.question {
 	transition: opacity 0.5s ease;
 	z-index: -1;
 	pointer-events: none;
+	overflow: hidden;
 }
 
 section.question.active {
 	opacity:1;
 	z-index: 100;
 	pointer-events: all;
+	overflow: visible;
+}
+
+section.question .wrapper {
+	padding: 5em 0;
 }
 
 h3 {
@@ -323,6 +330,7 @@ h3 {
 	font-size: 2em;
 	padding: 0.5em;
 	margin: 0.5em 0;
+	display: block;
 }
 
 /* ------- SUBMIT ANSWER BUTTON -------- */
@@ -563,4 +571,29 @@ li.correct::after {
 
 .cf {
     *zoom: 1;
+}
+
+/* ------- TWEET QUESTION -------- */
+
+.tweet-text {
+	margin: 0 3em;
+	padding: 1em;
+	background: white;
+	color: #333;
+	box-shadow: 0 1px 3px hsla(0,0%,0%,0.3);
+	border-top: 3px solid;
+}
+
+.tweet-meta {
+	float: right;
+	margin-top: 0.5em;
+	margin-right: 4.5em;
+	background: white;
+	color: #666;
+	padding: 1em;
+}
+
+
+.tweet-meta a {
+	color: inherit;
 }

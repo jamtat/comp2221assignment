@@ -84,7 +84,8 @@ var app = {
 	},
 
 	checkAnswer: function(questionId, callback) {
-		var isMultiple = app.model.questions[questionId].type === 'multiple'
+		var isMultiple = app.model.questions[questionId].type === 'multiple',
+			isTwitter = app.model.questions[questionId].type === 'twitter'
 		if(!isMultiple) {
 			var myAnswer = app.model.answers[questionId].split(' ').join('').toLowerCase()
 		} else {
@@ -92,22 +93,33 @@ var app = {
 				return a.split(' ').join('').toLowerCase()
 			}).sort()
 		}
-		app._.getAnswer(questionId, function(err, correctAnswer) {
-			if(err) {
-				app.view.showErr(err+'<br>Try reloading the application')
-			} else {
-				app.model.correctAnswers[questionId] = correctAnswer
-				if(!isMultiple) {
-					var ans = correctAnswer.split(' ').join('').toLowerCase()
-					callback(myAnswer == ans)
+		if(!isTwitter) {
+			app._.getAnswer(questionId, function(err, correctAnswer) {
+				if(err) {
+					app.view.showErr(err+'<br>Try reloading the application')
 				} else {
-					var ans = correctAnswer.map(function(a) {
-						return a.split(' ').join('').toLowerCase()
-					}).sort()
-					callback(myAnswer.join('') == ans.join(''))
+					app.model.correctAnswers[questionId] = correctAnswer
+					if(!isMultiple) {
+						var ans = correctAnswer.split(' ').join('').toLowerCase()
+						callback(myAnswer == ans)
+					} else {
+						var ans = correctAnswer.map(function(a) {
+							return a.split(' ').join('').toLowerCase()
+						}).sort()
+						callback(myAnswer.join('') == ans.join(''))
+					}
 				}
-			}
-		})
+			})
+		} else {
+			app.model.answers[questionId] = parseInt(app.model.answers[questionId])
+			var question = app.model.questions[questionId],
+				sortKey = question.sortkey,
+				valueMapped = question.tweets.map(function(t) {
+					return t[sortKey]
+				}),
+				correctAnswer = valueMapped.indexOf(Math.max.apply(Math, valueMapped))
+			callback(correctAnswer == myAnswer)
+		}
 	},
 
 	showHint: function(questionId) {
@@ -168,7 +180,7 @@ var app = {
 			})
 		},
 		getQuestions: function(callback) {
-			app._.getJSON('questions.php', {q:'all'}, function(err, j) {
+			app._.getJSON('questions.php', {q:'all',name:app.fbData.first_name}, function(err, j) {
 				callback(err,j)
 			})
 		},

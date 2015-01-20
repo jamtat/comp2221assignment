@@ -41,7 +41,7 @@
 
 		<script id="questions-template" type="text/x-handlebars-template">
 			{{#questions}}
-				<section class="question vcentre" data-question-id="{{@index}}" data-question-type="{{type}}">
+				<section class="question " data-question-id="{{@index}}" data-question-type="{{type}}">
 					<div class="wrapper">
 						<h3>{{title}}</h3>
 						<div class="answer-input-wrapper cf">
@@ -76,6 +76,23 @@
 									name="question-input-{{@../index}}"
 									id="question-input-{{@../index}}-{{@index}}"
 									placeholder="Type your answer here">
+							{{/ifvalue}}
+
+							{{#ifvalue type value="twitter"}}
+								{{#tweets}}
+								<div class="answer-input-row cf tweet-question">
+									<input type="radio"
+									name="questioninput-{{@../index}}"
+									id="question-input-{{@../index}}-{{@index}}"
+									value="{{@index}}">
+									<label for="question-input-{{@../index}}-{{@index}}">
+										<div class="tweet-text" style="border-color:#{{this.colour}};">&ldquo;{{this.text}}&bdquo;</div>
+									</label>
+									<div class="tweet-meta">
+										<a href="{{this.url}}" target="_blank">- {{this.username}}</a><span> on {{this.created}}</span>
+									</div>
+								</div>
+								{{/tweets}}
 							{{/ifvalue}}
 						</div>
 
