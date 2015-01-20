@@ -576,18 +576,20 @@ li.correct::after {
 /* ------- TWEET QUESTION -------- */
 
 .tweet-text {
-	margin: 0 3em;
+	margin: 0 2em 0 4em;
 	padding: 1em;
 	background: white;
 	color: #333;
 	box-shadow: 0 1px 3px hsla(0,0%,0%,0.3);
-	border-top: 3px solid;
+	border-top: 0.2em solid;
+	margin-top: -3em;
+	font-size: 0.7em;
 }
 
 .tweet-meta {
 	float: right;
 	margin-top: 0.5em;
-	margin-right: 4.5em;
+	margin-right: 2em;
 	background: white;
 	color: #666;
 	padding: 1em;

@@ -104,6 +104,7 @@ function map_question($question) {
 		case "twitter":
 			$tweets = getTweets($fname, $question['sortkey'], $question['count']);
 			$ques['tweets'] = $tweets['tweets'];
+			shuffle($ques['tweets']);
 			$ques['sortkey'] = $tweets['sortkey'];
 			break;
 	}
