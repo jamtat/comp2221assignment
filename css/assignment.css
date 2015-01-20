@@ -377,6 +377,8 @@ h3 {
 
 .answer-input-wrapper {
 	width: 100%;
+	max-width: 600px;
+	margin: auto;
 }
 
 .answer-input-row {

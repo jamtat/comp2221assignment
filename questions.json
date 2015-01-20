@@ -1,6 +1,6 @@
 [
 	{
-		  "title" : "Pick the most favourited tweet",
+		  "title" : "Pick the most favourited tweet containing your name",
 		  "count" : 3,
 		   "hint" : "Click on the links to go to them or just guess!",
 		   "type" : "twitter",
@@ -48,7 +48,7 @@
 		"correct" : "W3C"
 	},
 	{
-		"title" : "Pick the most retweeted tweet",
+		"title" : "Pick the most retweeted tweet containing your name",
 		"count" : 5,
 		"hint" : "Click on the links to go to them or just guess!",
 		"type" : "twitter",
