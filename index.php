@@ -88,8 +88,8 @@
 									<label for="question-input-{{@../index}}-{{@index}}">
 										<div class="tweet-text" style="border-color:#{{this.colour}};">&ldquo;{{this.text}}&bdquo;</div>
 									</label>
-									<div class="tweet-meta">
-										<a href="{{this.url}}" target="_blank">- {{this.username}}</a><span> on {{this.created}}</span>
+									<div class="tweet-meta" style="background-image:url({{this.display_pic}});">
+										<a href="{{this.url}}" target="_blank">- {{this.username}}</a><span></span>
 									</div>
 								</div>
 								{{/tweets}}

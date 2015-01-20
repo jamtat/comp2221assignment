@@ -592,7 +592,10 @@ li.correct::after {
 	margin-right: 2em;
 	background: white;
 	color: #666;
-	padding: 1em;
+	line-height: 3.3em;
+	padding: 0 1em 0 4em;
+	background-repeat: no-repeat;
+	background-size: 3.3em;
 }
 
 
