@@ -31,7 +31,8 @@
 					<div id="total-questions"></div>
 				</div>
 
-				<ol class="cf"></ol>
+				<ol id="answers-list" class="cf"></ol>
+				<ol id="leaderboard" class="cf"></ol>
 			</div>
 		</div>
 
@@ -109,6 +110,12 @@
 			{{#answers}}
 				<li {{#if this}}class="correct"{{/if}}></li>
 			{{/answers}}
+		</script>
+
+		<script id="leaderboard-template" type="text/x-handlebars-template">
+			{{#leaderboard}}
+				<li><img src="{{this.player.fbpic}}">{{this.score}} - {{this.player.name}}</li>
+			{{/leaderboard}}
 		</script>
 
 

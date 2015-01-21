@@ -518,13 +518,15 @@ h3 {
 	top:25%;
 }
 
-ol {
+/* ------- ANSWERS LIST -------- */
+
+ol#answers-list {
 	padding: 2em;
 	counter-reset: answers;
 	list-style: none;
 }
 
-ol li {
+ol#answers-list li {
 	float: left;
 	display: block;
 	font-size: 3em;
@@ -539,7 +541,7 @@ ol li {
 	position: relative;
 }
 
-li::before {
+ol#answers-list li::before {
 	content: counter(answers);
 	font-size: 0.5em;
 	display: block;
@@ -550,15 +552,63 @@ li::before {
 	text-align: left;
 }
 
-li::after {
+ol#answers-list li::after {
 	content: "X";
 	color: red;
 }
 
-li.correct::after {
+ol#answers-list li.correct::after {
 	content: "✓";
 	color: limegreen;
 }
+
+
+
+/* ------- LEADERBOARD -------- */
+
+ol#leaderboard {
+	counter-reset: leaderboard;
+	list-style: none;
+	padding: 0 3em 0 0;
+}
+
+ol#leaderboard li {
+	display: block;
+	line-height: 2em;
+	height: 2em;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	position: relative;
+	counter-increment: leaderboard;
+	padding-left: 3em;
+	font-size: 2em;
+	border: 1px solid white;
+	border-left: none;
+}
+
+ol#leaderboard li img {
+	display: block;
+	float: left;
+	margin: 0.25em 1em 0.25em 0.25em;
+	height: 1.5em;
+	border-radius: 50%;
+}
+
+ol#leaderboard li::before {
+	content: counter(leaderboard);
+	font-size: 1.5em;
+	display: block;
+	position: absolute;
+	top:0;
+	height: 100%;
+	border-right: 1px solid white;
+	left:0.4em;
+	padding-right: 0.5em;
+	line-height:1.2em;
+	text-align: right;
+}
+
 
 /* ------- CLEARFIX -------- */
 .cf:before,

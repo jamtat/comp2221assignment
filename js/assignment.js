@@ -145,18 +145,38 @@ var app = {
 		var totalScore = app.model.scores.reduce(function(a,b) {
 			return a+b
 		})
-		I('total-score').innerHTML = totalScore
-		I('total-questions').innerHTML = app.model.questions.length
-		app.el.body.className = 'summary'
+		app.model.totalScore = totalScore
 
-		//Prepare answers
-		var ans = app.model.scores.map(function(s) {
-			return !!s
+		app._.postLeaderboard(function(err, success) {
+			if(err) {
+				app.view.showErr(err+'<br>Try reloading the application')
+			} else {
+				app._.getLeaderboard(function(err, leaderboard) {
+					if(err) {
+						app.view.showErr(err+'<br>Try reloading the application')
+					} else {
+
+						console.log(leaderboard)
+						$('.question').removeClass(app.ACTIVE_QUESTION_CLASS)
+						I('total-score').innerHTML = totalScore
+						I('total-questions').innerHTML = app.model.questions.length
+						app.el.body.className = 'summary'
+
+						//Prepare answers
+						var ans = app.model.scores.map(function(s) {
+							return !!s
+						})
+						var templateSource = I('answers-template').innerHTML
+						var answersTemplate = Handlebars.compile(templateSource)
+						q('ol#answers-list').innerHTML = answersTemplate({answers:ans})
+
+						var templateSource = I('leaderboard-template').innerHTML
+						var leaderboardTemplate = Handlebars.compile(templateSource)
+						q('ol#leaderboard').innerHTML = leaderboardTemplate({leaderboard:leaderboard})
+					}
+				})
+			}
 		})
-		var templateSource = I('answers-template').innerHTML
-		var answersTemplate = Handlebars.compile(templateSource)
-		q('ol').innerHTML = answersTemplate({answers:ans})
-
 	},
 
 	_: {
@@ -192,6 +212,31 @@ var app = {
 		getAnswer: function(questionId, callback) {
 			app._.getJSON('questions.php', {q:questionId,answer:'please'}, function(err, j) {
 				callback(err,j.answer)
+			})
+		},
+		getLeaderboard: function(callback) {
+			app._.getJSON('leaderboard.php', {}, function(err, j) {
+				callback(err,j.leaderboard)
+			})
+		},
+		postLeaderboard: function(callback) {
+			var data = {
+				id: app.fbData.id,
+				name: app.fbData.name,
+				score: app.model.totalScore,
+				fbpic: app.fbPic
+			}
+			$.ajax({
+				type: 'POST',
+				url: 'leaderboard.php',
+				dataType: 'json',
+				data: data,
+				success: function(response) {
+					callback(null, response)
+				},
+				error: function(xhr, ajaxOptions, err) {
+					callback(err, {})
+				}
 			})
 		},
 		RGBToHSL: function(RGB) {
