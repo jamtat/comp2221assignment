@@ -5,6 +5,7 @@ require_once 'common.php';
 successHeader();
 $players = readJSON('players.json');
 $scores = readJSON('scores.json');
+$questions = readJSON('questions.json');
 
 $justids = array_map(function($s) {
 	return $s[0];
@@ -46,6 +47,10 @@ if(isset($_POST['id']) and isset($_POST['score'])) {
 	if(!isset($_POST['score'])) {
 		API_DIE('No player score sent');
 	}
+	if(intval($_POST['score']) > count($questions)) {
+		API_DIE('OI! Stop cheating you cheaky boi');
+	}
+
 	$playerId = $_POST['id'];
 	$newScore = array($playerId, intval($_POST['score']), time());
 	$newPlayer = array(
