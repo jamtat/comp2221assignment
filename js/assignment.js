@@ -16,6 +16,9 @@ var app = {
 					app.model.scores.push(0)
 					return q
 				})
+				var legalQuestionsTotal = result.summary.total_legal_questions,
+					normalQuestionsTotal = result.summary.total_questions - legalQuestionsTotal
+				I('questions-summary').innerHTML = normalQuestionsTotal+' general questions on web development<br>'+legalQuestionsTotal+' questions on the legal aspects of web development'
 				var templateSource = I('questions-template').innerHTML
 				var questionsTemplate = Handlebars.compile(templateSource)
 				app.el.main.innerHTML = questionsTemplate({questions:app.model.questions})

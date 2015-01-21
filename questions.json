@@ -67,18 +67,6 @@
 		]
 	},
 	{
-		"title" : "How is EU Directive 97/7/EC more commonly known?",
-		"legal": 1,
-		"type" : "choice",
-		"hint" : "The directive aids the protection of consumers in respect of distance contracts",
-		"correct" : 0,
-		"answers" : [
-			"Distance Selling Directive",
-			"Jeremy Bacon",
-			"Guidance for binary selling mechanisms"
-		]
-	},
-	{
 		"title" : "Which of the following are required to comply with EU anti spam laws?",
 		"legal" : 1,
 		"type" : "multiple",
@@ -96,5 +84,79 @@
 		"type" : "text",
 		"hint" : "It's a 90's kid",
 		"correct" : "1990"
+	},
+	{
+		"title" : "The Computer Misuse Act caters for",
+		"legal" : 1,
+		"type" : "multiple",
+		"hint" : "Source: Wikipedia",
+		"correct" : [0,1,2],
+		"answers" : [
+			"\"unauthorized access to computer materials\"",
+			"\"unauthorized access with intent to commit or facilitate the commission of further offences\"",
+			"\"unauthorized modification of computer material.\""
+		]
+	},
+	{
+		"title" : "Can you be prosecuted under the Disabilities Discrimination Act for not having an accessible website?",
+		"legal": 1,
+		"type" : "choice",
+		"hint" : "Could you be prosecuted if your shop didn't have disabled access?",
+		"correct" : 1,
+		"answers" : [
+			"No",
+			"Yes"
+		]
+	},
+	{
+		"title" : "How is EU Directive 2000/31/EC also known?",
+		"legal": 1,
+		"type" : "choice",
+		"hint" : "The answer is unrelated to the <a href=\"http:\/\/www.telegraph.co.uk\/technology\/twitter\/10792366\/Ed-Balls-Day-third-anniversary-of-MPs-tweet.html\" target=\"_blank\">28th April 2011<\/a>",
+		"correct" : 1,
+		"answers" : [
+			"Distance Selling Directive",
+			"E-commerce Directive",
+			"Ed Balls"
+		]
+	},
+	{
+		"title" : "Using someone else's text copy or photos or images on your website without their permission constitutes _ _ _ _ _ _ _ _ _ infringement",
+		"legal": 1,
+		"type" : "text",
+		"hint" : "&copy;",
+		"correct" : "copyright"
+	},
+	{
+		"title" : "Does 'hotlinking' to someone else's JavaScript file constitute copyright infringement? (in US law)",
+		"legal": 1,
+		"type" : "choice",
+		"hint" : "Search for \"Inline Linking\". <a href=\"https:\/\/www.youtube.com\/watch?v=fWNaR-rxAic\" target=\"_blank\">Or jam out to some tunes<\/a>",
+		"correct" : 1,
+		"answers" : [
+			"Yes",
+			"No",
+			"Call me maybe"
+		]
+	},
+	{
+		"title" : "In which year was the EU cookie directive introduced?",
+		"legal": 1,
+		"type" : "text",
+		"hint" : "This was the same year and month in which the US conducted an operation to kill Osama Bin Laden, though if memory serves me correctly it wasn't because he failed to comply with this directive.",
+		"correct" : "2011"
+	},
+	{
+		"title" : "Which of these pieces of legislation predominantly covers how a website owner should handle users' data?",
+		"legal": 1,
+		"type" : "choice",
+		"hint" : "This Act is dated 1998",
+		"correct" : 2,
+		"answers" : [
+			"Disability Discrimination Act",
+			"Computer Misuse Act",
+			"Data Protection Act"
+		]
 	}
+
 ]

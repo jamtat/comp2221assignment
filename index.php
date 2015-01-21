@@ -17,6 +17,7 @@
 				<h1>Ben's Amazing Quiz</h1>
 				<span>Checking with Facebook</span>
 				<div class="begin-button">Get Started</div>
+				<span id="questions-summary"></span>
 			</div>
 		</div>
 		<main>

@@ -140,6 +140,11 @@ input[type=submit] {
 	height:0em;
 }
 
+.loaded #intro #questions-summary {
+	height: auto;
+	opacity: 1;
+}
+
 .loading #intro .begin-button {
 	height: 2em;
 	width: 100%;
