@@ -23,7 +23,7 @@
 
 		</main>
 
-		<div id="summary" class="vcentre">
+		<div id="summary" class="">
 			<div class="wrapper">
 				<h1>You Scored</h1>
 				<div id="score-display">

@@ -47,9 +47,12 @@ function map_answer($question) {
 
 try {
 	//Get the questions
-	$input = file_get_contents('questions.json');
-	$questions = json_decode($input, true);
+	$questions = readJSON('questions.json');
 	$totalquestions = count($questions);
+	$legalquestions = $questions;
+	$legalquestions = array_filter($legalquestions, function($q) {
+		return isset($q['legal']) and $q['legal'] == 1;
+	});
 } catch(Exception $e) {
 	API_DIE('Internal Server Error: Could not fetch questions');
 }
@@ -94,7 +97,8 @@ if(isset($_GET['q']) and $_GET['q'] === 'all') {
 
 //Append some summary information
 $result['summary'] = Array(
-	"total_questions" => $totalquestions
+	"total_questions" => $totalquestions,
+	"total_legal_questions" => count($legalquestions)
 );
 
 API_SUCCESS();

@@ -53,5 +53,48 @@
 		"hint" : "Click on the links to go to them or just guess!",
 		"type" : "twitter",
 		"sortkey" : "retweets"
+	},
+	{
+		"title" : "How is EU Directive 97/7/EC more commonly known?",
+		"legal": 1,
+		"type" : "choice",
+		"hint" : "The directive aids the protection of consumers in respect of distance contracts",
+		"correct" : 0,
+		"answers" : [
+			"Distance Selling Directive",
+			"Jeremy Bacon",
+			"Guidance for binary selling mechanisms"
+		]
+	},
+	{
+		"title" : "How is EU Directive 97/7/EC more commonly known?",
+		"legal": 1,
+		"type" : "choice",
+		"hint" : "The directive aids the protection of consumers in respect of distance contracts",
+		"correct" : 0,
+		"answers" : [
+			"Distance Selling Directive",
+			"Jeremy Bacon",
+			"Guidance for binary selling mechanisms"
+		]
+	},
+	{
+		"title" : "Which of the following are required to comply with EU anti spam laws?",
+		"legal" : 1,
+		"type" : "multiple",
+		"hint" : "It's rude to email someone without their permission",
+		"correct" : [0,2],
+		"answers" : [
+			"The recipient must 'opt in'",
+			"The recipient need not give permission to receive emails",
+			"The email should contain instructions as to how to stop receiving future communications"
+		]
+	},
+	{
+		"title" : "In what year did the Computer Misuse Act gain royal assent?",
+		"legal": 1,
+		"type" : "text",
+		"hint" : "It's a 90's kid",
+		"correct" : "1990"
 	}
 ]
